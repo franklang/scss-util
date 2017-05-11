@@ -1,0 +1,57 @@
+/*
+ * SCSS skew mixin by Frank LANG
+ * Inspired by "Skew one side of element" codepen by Sami Laitinen
+ * https://codepen.io/o/pen/wosfH
+ */
+
+@mixin skew(
+  $side: both,
+  $deg: -20deg,
+  $right: -15px,
+  $left: -15px,
+  $width: 30px,
+  $bg: #fff) {
+
+  position: relative;
+
+  &:after,
+  &:before {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: block;
+  }
+
+  @if $side == left {
+    &:before {
+      left: $left;
+      width: $width;
+      background: $bg;
+      transform: skew($deg);
+    }
+  }
+  @if $side == right {
+    &:after {
+      right: $right;
+      width: $width;
+      background: $bg;
+      transform: skew($deg);
+    }
+  }
+  @else if $side == both {
+    &:before {
+      left: $left;
+      width: $width;
+      background: $bg;
+      transform: skew($deg);
+    }    
+    &:after {
+      right: $right;
+      width: $width;
+      background: $bg;
+      transform: skew($deg);
+    }
+  }
+}
