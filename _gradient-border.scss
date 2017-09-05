@@ -1,0 +1,32 @@
+/*
+ * gradient border
+ */
+@mixin gradient-border(
+  $border-width: 10px,
+  $gradient-top-color: $white,
+  $gradient-bottom-color: $black) {
+  position: relative;
+  border-top: $border-width solid $gradient-top-color;
+  border-bottom: $border-width solid $gradient-bottom-color;
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from($gradient-top-color), to($gradient-bottom-color));
+    background-image: -webkit-linear-gradient($gradient-top-color, $gradient-bottom-color);
+    background-image: -moz-linear-gradient($gradient-top-color, $gradient-bottom-color);
+    background-image: -o-linear-gradient($gradient-top-color, $gradient-bottom-color);
+    background-image: linear-gradient($gradient-top-color, $gradient-bottom-color);
+    top: -$border-width;
+    bottom: -$border-width;
+    width: $border-width;    
+  }
+  &:before {
+    left: -$border-width;
+    left: 0; // foundation 6
+  }
+  &:after {
+    right: -$border-width;
+    right: 0; // foundation 6
+  }
+}
