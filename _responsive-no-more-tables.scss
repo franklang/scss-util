@@ -1,0 +1,76 @@
+/*
+ * responsive-no-more-tables
+ * https://elvery.net/demo/responsive-tables/#no-more-tables
+ */
+@mixin responsive-no-more-tables(
+  $breakpoint: medium down){
+
+  @include breakpoint($breakpoint){
+    //
+    // Core styles
+ 
+    // Force table to not be like tables anymore
+    table, 
+    thead, 
+    tbody, 
+    th, 
+    td, 
+    tr { 
+      display: block; 
+    }
+   
+    // Hide table headers (but not display: none;, for accessibility)
+    thead tr { 
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+   
+    td { 
+      // Behave  like a "row"
+      position: relative;
+      white-space: normal;
+      &:before { 
+        // Now like a table header
+        position: absolute;
+        // Top/left values mimic padding
+        white-space: nowrap;
+      }
+    }
+   
+    /*
+    Label the data
+    */
+    td:before { content: attr(data-title); }
+    // end: Core styles
+
+
+    //
+    // Skin styles
+    
+    tr { border: 1px solid #ccc; }
+
+    td { 
+      // Behave  like a "row"
+      border: none;
+      border-bottom: 1px solid #eee; 
+      padding-left: 50%; 
+      text-align: left;
+      &:before { 
+        // Top/left values mimic padding
+        top: 6px;
+        left: 6px;
+        width: 45%; 
+        padding-right: 10px; 
+        text-align: left;
+        font-weight: bold;
+      }
+    }
+    // end: Skin styles
+  }  
+}
+
+.responsive-no-more-tables {
+  @include responsive-no-more-tables();
+}
+// end: responsive-no-more-tables
